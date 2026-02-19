@@ -1,0 +1,49 @@
+#include <stdio.h>
+
+int main() {
+    int n, m;
+
+    printf("Enter size of array A: ");
+    scanf("%d", &n);
+
+    int A[n];
+    printf("Enter elements of A:\n");
+    for(int i = 0; i < n; i++) {
+        scanf("%d", &A[i]);
+    }
+
+    printf("Enter size of array B: ");
+    scanf("%d", &m);
+
+    int B[m];
+    printf("Enter elements of B:\n");
+    for(int i = 0; i < m; i++) {
+        scanf("%d", &B[i]);
+    }
+
+    int count = 0;
+
+    for(int i = 0; i < n; i++) {
+        int found = 0;
+
+        for(int j = 0; j < m; j++) {
+            if(A[i] == B[j]) {
+                found = 1;
+                break;
+            }
+        }
+
+        if(found == 0) {
+            printf("%d ", A[i]);
+            count++;
+        }
+    }
+
+    if(count == 0) {
+        printf("-1");
+    } else {
+        printf("\nCount = %d", count);
+    }
+    
+    return 0;
+}
