@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct dlist
+{
+    int info;
+    struct dlist *pre, *next;
+};
+
+void create();
+void traverse_forward();
+void traverse_backward();
+
+struct dlist *first = NULL, *last = NULL;
+
+void create()
+{
+    struct dlist *h;
+    int x;
+
+    while(1)
+    {
+        h = (struct dlist*)malloc(sizeof(struct dlist));
+
+        printf("Enter info: ");
+        scanf("%d", &h->info);
+
+        if(first == NULL)
+        {
+            first = h;
+            last = h;
+            h->pre = NULL;
+        }
+        else
+        {
+            last->next = h;
+            h->pre = last;
+            last = h;
+        }
+
+        printf("Enter 1 for new node: ");
+        scanf("%d", &x);
+
+        if(x != 1)
+            break;
+    }
+
+    last->next = NULL;
+}
+
+void traverse_forward()
+{
+    struct dlist *h;
+
+    h = first;
+
+    while(h != NULL)
+    {
+        printf("%d ", h->info);
+        h = h->next;
+    }
+}
+
+void traverse_backward()
+{
+    struct dlist *h;
+
+    h = last;
+
+    while(h != NULL)
+    {
+        printf("%d ", h->info);
+        h = h->pre;
+    }
+}
+
+int main()
+{
+    create();
+
+    printf("\nForward Traversal:\n");
+    traverse_forward();
+
+    printf("\nBackward Traversal:\n");
+    traverse_backward();
+
+    return 0;
+}
