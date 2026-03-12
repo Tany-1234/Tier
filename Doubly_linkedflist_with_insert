@@ -1,0 +1,165 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct dlist
+{
+    int info;
+    struct dlist *pre, *next;
+};
+
+struct dlist *first = NULL, *last = NULL;
+
+void insert_first()
+{
+    struct dlist *h;
+    h = (struct dlist*)malloc(sizeof(struct dlist));
+
+    printf("Enter value: ");
+    scanf("%d",&h->info);
+
+    if(first == NULL)
+    {
+        first = last = h;
+        h->pre = NULL;
+        h->next = NULL;
+    }
+    else
+    {
+        h->next = first;
+        h->pre = NULL;
+        first->pre = h;
+        first = h;
+    }
+}
+
+void insert_last()
+{
+    struct dlist *h;
+    h = (struct dlist*)malloc(sizeof(struct dlist));
+
+    printf("Enter value: ");
+    scanf("%d",&h->info);
+
+    if(first == NULL)
+    {
+        first = last = h;
+        h->pre = NULL;
+        h->next = NULL;
+    }
+    else
+    {
+        last->next = h;
+        h->pre = last;
+        h->next = NULL;
+        last = h;
+    }
+}
+
+void insert_after()
+{
+    struct dlist *h,*p;
+    int x;
+
+    printf("Insert after which value: ");
+    scanf("%d",&x);
+
+    p = first;
+
+    while(p != NULL)
+    {
+        if(p->info == x)
+        {
+            h = (struct dlist*)malloc(sizeof(struct dlist));
+
+            printf("Enter new value: ");
+            scanf("%d",&h->info);
+
+            h->next = p->next;
+            h->pre = p;
+
+            if(p->next != NULL)
+                p->next->pre = h;
+            else
+                last = h;
+
+            p->next = h;
+            return;
+        }
+
+        p = p->next;
+    }
+
+    printf("Value not found\n");
+}
+
+void traverse_forward()
+{
+    struct dlist *h;
+    h = first;
+
+    while(h != NULL)
+    {
+        printf("%d ",h->info);
+        h = h->next;
+    }
+}
+
+void traverse_backward()
+{
+    struct dlist *h;
+    h = last;
+
+    while(h != NULL)
+    {
+        printf("%d ",h->info);
+        h = h->pre;
+    }
+}
+
+int main()
+{
+    int ch;
+
+    while(1)
+    {
+        printf("\n1.Insert First");
+        printf("\n2.Insert Last");
+        printf("\n3.Insert After");
+        printf("\n4.Traverse Forward");
+        printf("\n5.Traverse Backward");
+        printf("\n6.Exit");
+        printf("\nEnter choice: ");
+        scanf("%d",&ch);
+
+        switch(ch)
+        {
+            case 1:
+                insert_first();
+                break;
+
+            case 2:
+                insert_last();
+                break;
+
+            case 3:
+                insert_after();
+                break;
+
+            case 4:
+                traverse_forward();
+                break;
+
+            case 5:
+                traverse_backward();
+                break;
+
+            case 6:
+                exit(0);
+
+            default:
+                printf("Invalid choice");
+        }
+    }
+
+    return 0;
+}
