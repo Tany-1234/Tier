@@ -1,0 +1,44 @@
+#include<stdio.h>
+
+int main() {
+    int n,m,i;
+    int sum,max=0,count=0;
+
+    printf("Enter the number of n: ");
+    scanf("%d",&n);
+
+    printf("Enter the number of m: ");
+    scanf("%d",&m);
+
+    int arr[n][m];
+
+    for(i=0;i<n;i++) {
+        for(int j=0;j<m;j++) {
+            printf("Enter the value of arr[%d][%d]: ",i,j);
+            scanf("%d",&arr[i][j]);
+        }
+    }
+    printf("Matrix is:\n");
+    for(i=0;i<n;i++) {
+        for(int j=0;j<m;j++) {
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+    for(i=0;i<n;i++) {
+        sum = 0;
+
+        for(int j=0;j<m;j++) {
+            sum += arr[i][j];
+        }
+        if(i==0 || sum > max) {
+            max = sum;
+            count = i;
+        }
+    }
+
+    printf("Maximum sum = %d\n", max);
+    printf("Wealthy customer index = %d\n", count);
+
+    return 0;
+}
