@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int main() {
+    char s1[100], s2[100];
+    int count[26] = {0};
+    int i, k, changes = 0;
+
+    printf("Enter first string: ");
+    scanf("%s", s1);
+
+    printf("Enter second string: ");
+    scanf("%s", s2);
+
+    printf("Enter value of k: ");
+    scanf("%d", &k);
+    for(i = 0; s1[i] != '\0'; i++) {
+        count[s1[i] - 'a']++;
+    }
+    for(i = 0; s2[i] != '\0'; i++) {
+        count[s2[i] - 'a']--;
+    }
+    for(i = 0; i < 26; i++) {
+        if(count[i] > 0)
+            changes += count[i];
+    }
+
+    if(changes <= k)
+        printf("yes");
+    else
+        printf("No");
+
+    return 0;
+}
